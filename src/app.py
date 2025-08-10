@@ -38,6 +38,45 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    # Deporte
+    "Soccer Team": {
+        "description": "Join the school soccer team and compete in local leagues",
+        "schedule": "Wednesdays and Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 22,
+        "participants": ["lucas@mergington.edu", "mateo@mergington.edu"]
+    },
+    "Basketball Club": {
+        "description": "Practice basketball and participate in tournaments",
+        "schedule": "Tuesdays and Thursdays, 5:00 PM - 6:30 PM",
+        "max_participants": 15,
+        "participants": ["sofia@mergington.edu", "martin@mergington.edu"]
+    },
+    # Artísticas
+    "Art Workshop": {
+        "description": "Explore painting, drawing, and sculpture techniques",
+        "schedule": "Mondays, 3:30 PM - 5:00 PM",
+        "max_participants": 18,
+        "participants": ["valentina@mergington.edu", "camila@mergington.edu"]
+    },
+    "Music Band": {
+        "description": "Play instruments and perform in the school band",
+        "schedule": "Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 10,
+        "participants": ["sebastian@mergington.edu", "antonio@mergington.edu"]
+    },
+    # Intelectuales
+    "Math Olympiad": {
+        "description": "Prepare for math competitions and improve problem-solving skills",
+        "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": ["isabella@mergington.edu", "martina@mergington.edu"]
+    },
+    "Debate Club": {
+        "description": "Develop public speaking and argumentation skills",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 14,
+        "participants": ["julian@mergington.edu", "renata@mergington.edu"]
     }
 }
 
@@ -61,6 +100,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Validar que el estudiante no este ya registrado
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already registered")
 
     # Add student
     activity["participants"].append(email)
